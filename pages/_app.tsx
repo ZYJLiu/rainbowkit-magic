@@ -11,32 +11,13 @@ import { argentWallet, trustWallet } from "@rainbow-me/rainbowkit/wallets"
 import { magicConnectConnector } from "../connector/magicConnect"
 
 import { createClient, configureChains, WagmiConfig } from "wagmi"
-import { sepolia, goerli, polygonMumbai, optimismGoerli } from "wagmi/chains"
-import { jsonRpcProvider } from "wagmi/providers/jsonRpc"
-
-type ChainIdToRpcUrl = {
-  [key: number]: string
-}
-
-// Custom RPC Endpoints
-const chainIdToRpcUrl: ChainIdToRpcUrl = {
-  11155111: process.env.NEXT_PUBLIC_SEPOLIA_RPC_URL!,
-  // 420: process.env.NEXT_PUBLIC_OPTIMISM_RPC_URL!,
-  // 80001: process.env.NEXT_PUBLIC_POLYGON_RPC_URL!,
-  // 5: process.env.NEXT_PUBLIC_ETHEREUM_RPC_URL!,
-}
+import { sepolia } from "wagmi/chains"
+import { publicProvider } from "wagmi/providers/public"
 
 // Configure chains, providers, and webSocketProvider
 const { chains, provider, webSocketProvider } = configureChains(
   [sepolia],
-  // [sepolia, goerli, polygonMumbai, optimismGoerli],
-  [
-    jsonRpcProvider({
-      rpc: (chain) => ({
-        http: chainIdToRpcUrl[chain.id],
-      }),
-    }),
-  ]
+  [publicProvider()]
 )
 
 // Rainbowkit default wallets
