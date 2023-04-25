@@ -16,10 +16,10 @@ export const magicConnectConnector = ({ chains }: any) => ({
         apiKey: process.env.NEXT_PUBLIC_MAGICKEY!,
         magicSdkConfiguration: {
           network: {
-            rpcUrl: process.env.NEXT_PUBLIC_SEPOLIA_RPC!,
-            chainId: 11155111,
-            // chainId: chains[0].id,
-            // rpcUrl: chains[0].rpcUrls.default[0],
+            // rpcUrl: process.env.NEXT_PUBLIC_SEPOLIA_RPC!,
+            // chainId: 11155111,
+            rpcUrl: chains[0].rpcUrls.default[0],
+            chainId: chains[0].id,
           },
         },
       },
