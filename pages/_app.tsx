@@ -21,14 +21,15 @@ type ChainIdToRpcUrl = {
 // Custom RPC Endpoints
 const chainIdToRpcUrl: ChainIdToRpcUrl = {
   11155111: process.env.NEXT_PUBLIC_SEPOLIA_RPC_URL!,
-  420: process.env.NEXT_PUBLIC_OPTIMISM_RPC_URL!,
-  80001: process.env.NEXT_PUBLIC_POLYGON_RPC_URL!,
-  5: process.env.NEXT_PUBLIC_ETHEREUM_RPC_URL!,
+  // 420: process.env.NEXT_PUBLIC_OPTIMISM_RPC_URL!,
+  // 80001: process.env.NEXT_PUBLIC_POLYGON_RPC_URL!,
+  // 5: process.env.NEXT_PUBLIC_ETHEREUM_RPC_URL!,
 }
 
 // Configure chains, providers, and webSocketProvider
 const { chains, provider, webSocketProvider } = configureChains(
-  [sepolia, goerli, polygonMumbai, optimismGoerli],
+  [sepolia],
+  // [sepolia, goerli, polygonMumbai, optimismGoerli],
   [
     jsonRpcProvider({
       rpc: (chain) => ({
@@ -53,7 +54,7 @@ const demoAppInfo = {
 const connectors = connectorsForWallets([
   {
     groupName: "Magic",
-    wallets: [magicConnectConnector({ chains })],
+    wallets: [magicConnectConnector({ chains }) as any],
   },
   ...wallets,
   {
